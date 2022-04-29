@@ -1,0 +1,23 @@
+{
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "登录界面",
+                    "pathName": "pages/login/login",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,11 @@
+<view style="margin: 20rpx 0;">
+  <view style="margin: 40rpx; text-align: center;">
+    <van-icon name="smile-o" size="50px" color="orange" />
+  </view>
+  <van-cell-group inset>
+    <van-cell title="用户名" value="{{ user.username }}" />
+    <van-cell title="昵称" value="{{ user.nickname }}" />
+    <van-cell title="地址" value="{{ user.address }}" />
+  </van-cell-group>
+</view>
+

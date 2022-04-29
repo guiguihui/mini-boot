@@ -1,0 +1,15 @@
+server:
+  port: 80
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/mini-boot?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: admin
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
