@@ -14,7 +14,6 @@ import com.example.demo.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -120,7 +119,6 @@ public class UserController {
 
     }
 
-
     /**
      * excel 导入
      */
@@ -162,17 +160,25 @@ public class UserController {
 
     }
 
-    @PostMapping("/login")
-    public R login(@RequestBody UserDTO userDTO) {
-        Integer userId = userDTO.getUserId();
-        String userPassword = userDTO.getUserPassword();
+    @GetMapping("/login")
+    public boolean login(@RequestParam Integer id, @RequestParam String password) {
+        Integer userId = id;
+        String userPassword = password;
         if(userId==null || userPassword==null){
-            return new R(false,"登录失败");
+            return false;
         }
-        return iUserService.login(userDTO);
+        return iUserService.login(userId,userPassword);
     }
 
-
+    @GetMapping("/login2")
+    public User login2(@RequestParam Integer id, @RequestParam String password) {
+        Integer userId = id;
+        String userPassword = password;
+        if(userId==null || userPassword==null){
+            return null;
+        }
+        return iUserService.login2(userId,userPassword);
+    }
 
 
 

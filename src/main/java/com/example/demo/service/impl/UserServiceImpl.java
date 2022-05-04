@@ -15,15 +15,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements IUser
     @Autowired
     private UserDao userDao;
 
-    @Override
-    public R login(UserDTO userDTO) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("UserId",userDTO.getUserId());
-        queryWrapper.eq("UserPassword",userDTO.getUserPassword());
-        User user = getOne(queryWrapper);
-        boolean flag  = user != null;
-        return new R(flag,flag ? "登录成功^_^" : "登录失败-_-!");
-    }
+
 
     @Override
     public boolean adminLogin(UserDTO userDTO) {
@@ -34,5 +26,24 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements IUser
         User admin = getOne(queryWrapper);
         boolean flag  = (admin != null);
         return flag;
+    }
+
+    @Override
+    public boolean login(Integer userId, String userPassword) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("User_id", userId);
+        queryWrapper.eq("User_password", userPassword);
+        User admin = getOne(queryWrapper);
+        boolean flag = (admin != null);
+        return flag;
+    }
+
+    @Override
+    public User login2(Integer userId, String userPassword) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("User_id", userId);
+        queryWrapper.eq("User_password", userPassword);
+        User user = getOne(queryWrapper);
+        return user;
     }
 }

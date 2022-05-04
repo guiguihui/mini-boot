@@ -5,7 +5,6 @@ import com.example.demo.domain.Bill;
 import com.example.demo.service.IBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 
 @RestController

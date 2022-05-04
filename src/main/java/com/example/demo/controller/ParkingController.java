@@ -8,12 +8,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.controller.utils.R;
 import com.example.demo.domain.Parking;
-import com.example.demo.domain.User;
 import com.example.demo.service.IParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
@@ -26,7 +24,6 @@ public class ParkingController {
 
     @Autowired
     private IParkingService iParkingService;
-
 
     /**
      分页

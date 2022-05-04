@@ -6,7 +6,10 @@ import com.example.demo.controller.utils.R;
 import com.example.demo.domain.User;
 
 public interface IUserService extends IService<User> {
-    R login(UserDTO userDTO);
 
     boolean adminLogin(UserDTO userDTO);
+
+    boolean login(Integer userId, String userPassword);
+
+    User login2(Integer userId, String userPassword);
 }
