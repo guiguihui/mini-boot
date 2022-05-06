@@ -6,6 +6,7 @@ import com.example.demo.service.IBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bills")
@@ -59,8 +60,19 @@ public class BillController {
      * @param BillId
      * @return Reserve
      */
-    @GetMapping(value = "{BillId}")
+    @GetMapping("{BillId}")
     public R getById(@PathVariable String BillId){
         return new R(true,iBillService.getById(BillId));
+    }
+
+
+    @GetMapping("/car/{CarId}")
+    public List<Bill> getByCarId(@PathVariable String CarId){
+        String carId = CarId;
+
+        if(carId==null){
+            return null;
+        }
+        return iBillService.getByCarId(carId);
     }
 }

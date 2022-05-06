@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 public class Bill {
-    @TableId(type = IdType.INPUT)
+    @TableId(value = "Bill_id",type = IdType.INPUT)
     private String BillId;
     private String ReserveId;
     private int ParkingId;
