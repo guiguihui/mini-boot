@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.controller.utils.R;
+import com.example.demo.domain.Bill;
 import com.example.demo.domain.Reserve;
 import com.example.demo.service.IReserveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -12,6 +15,16 @@ import org.springframework.web.bind.annotation.*;
 public class ReserveController {
     @Autowired
     private IReserveService iReserveService;
+
+    @GetMapping("/car/{CarId}")
+    public List<Reserve> getByCarId(@PathVariable String CarId){
+        String carId = CarId;
+
+        if(carId==null){
+            return null;
+        }
+        return iReserveService.getByCarId(carId);
+    }
 
     /**
      * 新建预定信息

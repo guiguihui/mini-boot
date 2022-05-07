@@ -64,8 +64,6 @@ public class ParkingController {
     public void export(HttpServletResponse response) throws Exception {
         // 从数据库查询出所有的数据
         List<Parking> list = iParkingService.list();
-        // 通过工具类创建writer 写出到磁盘路径
-//        ExcelWriter writer = ExcelUtil.getWriter(filesUploadPath + "/用户信息.xlsx");
         // 在内存操作，写出到浏览器
         ExcelWriter writer = ExcelUtil.getWriter(true);
         //自定义标题别名
@@ -78,23 +76,17 @@ public class ParkingController {
         writer.addHeaderAlias("ParkingLongitude", "ParkingLongitude");
         writer.addHeaderAlias("ParkingFee", "ParkingFee");
         writer.addHeaderAlias("IsDeleted", "IsDeleted");
-
-
         // 一次性写出list内的对象到excel，使用默认样式，强制输出标题
         writer.write(list, true);
-
         // 设置浏览器响应的格式
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
         String fileName = URLEncoder.encode("ParkingInformation", "UTF-8");
         response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ".xlsx");
-
         ServletOutputStream out = response.getOutputStream();
         writer.flush(out, true);
         out.close();
         writer.close();
-
     }
-
 
     /**
      * excel 导入
@@ -118,25 +110,28 @@ public class ParkingController {
         return new R(flag, flag ? "添加成功^_^" : "添加失败-_-!");
     }
 
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 查询全部停车场信息
-     * @return
      */
     @GetMapping
-    public R getAll(){
-        return new R(true,iParkingService.list());
+    public R getAll(@RequestParam(defaultValue = "") String parkingName){
+        QueryWrapper<Parking> queryWrapper = new QueryWrapper<>();
+        if (!"".equals(parkingName)) {
+            queryWrapper.like("Parking_name", parkingName);
+        }
+        return new R(true,iParkingService.list(queryWrapper));
     }
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 停车场信息更新
