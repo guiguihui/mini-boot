@@ -33,7 +33,7 @@ public class ReserveController {
      */
     @PostMapping
     public R save(@RequestBody Reserve reserve){
-        boolean flag = iReserveService.save(reserve);
+        boolean flag = iReserveService.saveOrUpdate(reserve);
         return new R(flag, flag ? "添加成功^_^" : "添加失败-_-!");
     }
 

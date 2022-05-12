@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.controller.utils.R;
+import com.example.demo.domain.Parking;
 import com.example.demo.domain.Space;
 import com.example.demo.service.ISpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,11 +103,11 @@ public class SpaceController {
     }
 
     /**
-     * 新建停车位信息
+     * 新建或更新停车位信息
      */
     @PostMapping
     public R save(@RequestBody Space space){
-        boolean flag = iSpaceService.save(space);
+        boolean flag = iSpaceService.saveOrUpdate(space);
         return new R(flag, flag ? "添加成功^_^" : "添加失败-_-!");
     }
 
@@ -118,33 +119,34 @@ public class SpaceController {
         return new R(iSpaceService.removeById(SpaceId));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
-     * 查询全部停车位信息
-     * @return
+     * 查询停车位信息
      */
-    @GetMapping
-    public R getAll(){
-        return new R(true,iSpaceService.list());
+    @GetMapping("/parkingId")
+    public List<Space> getAll(@RequestParam(defaultValue = "") String parkingId){
+        QueryWrapper<Space> queryWrapper = new QueryWrapper<>();
+        if (!"".equals(parkingId)) {
+            queryWrapper.eq("Parking_id", parkingId);
+        }
+        return iSpaceService.list(queryWrapper);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 停车位信息更新
@@ -159,8 +161,6 @@ public class SpaceController {
 
     /**
      * 按Id查询停车位
-     * @param SpaceId
-     * @return
      */
     @GetMapping(value = "{SpaceId}")
     public R getById(@PathVariable Integer SpaceId){
