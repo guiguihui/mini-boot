@@ -17,6 +17,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -132,20 +133,15 @@ public class SpaceController {
     }
 
 
+    @GetMapping("/available")
+    public int AvailableSpaceCount() throws UnsupportedEncodingException {
+        String name = "空闲";
+        name = new String (name.getBytes("gbk"), "utf-8");
+        QueryWrapper<Space> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("Space_state",name);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return iSpaceService.count(queryWrapper);
+    }
 
 
     /**

@@ -180,10 +180,11 @@ public class UserController {
         return iUserService.login2(userId,userPassword);
     }
 
-
-
-
-
+    @GetMapping("/count")
+    public int UserCounter(){
+        Integer count = iUserService.count();
+        return  count;
+    }
 
     /**
      * 用户信息更新
